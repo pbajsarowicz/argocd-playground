@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: local-apps
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: guestbook
+            path: guestbook
+  template:
+    metadata:
+      name: '{{name}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/pbajsarowicz/argocd-playground.git
+        targetRevision: argo-1
+        path: 'apps/{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
