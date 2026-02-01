@@ -16,7 +16,7 @@ spec:
       project: default
       source:
         repoURL: https://github.com/pbajsarowicz/argocd-playground.git
-        targetRevision: argo-1
+        targetRevision: main
         path: 'apps/{{path}}'
       destination:
         server: https://kubernetes.default.svc
